@@ -1,7 +1,9 @@
-import express, { json } from "express";
-import cors from "cors";
-import { connectToMongoDb } from "./config/dbconfig.js";
 import "dotenv/config";
+import express from "express";
+import cors from "cors";
+
+import { connectToMongoDb } from "./config/dbconfig.js";
+import userRouter from "./routers/userRouter.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -14,6 +16,7 @@ app.use(express.json());
 connectToMongoDb();
 
 // Routes
+app.use("/api/user", userRouter);
 
 // Run the server
 app.listen(PORT, (error) => {
